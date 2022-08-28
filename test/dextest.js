@@ -2,9 +2,9 @@ const Dex = artifacts.require("Dex")
 const Link = artifacts.require("Link");
 const truffleAsserts = require("truffle-assertions")
 
-contract("Dex", accounts => {
+contract.skip("Dex", accounts => {
     //User most have have ETH deposited such that deposited eth >= BUY order value
-    it("should throw an error when Eth balance in the wallet is too low when creating a BUY limiting order", async () => {
+    it("should throw an error when Eth balance in the wallet is too low when creating a BUY limit order", async () => {
         let dex = await Dex.deployed()
         await truffleAsserts.reverts(
             dex.createLimitOrder(0, web3.utils.fromUtf8('LINK'), 10, 1)
@@ -16,7 +16,7 @@ contract("Dex", accounts => {
     })
 
     //The user most have have token deposited such that token balance >= SELL order value
-    it("should throw an error if token balance in the wallet is too low when creating a SELL limiting order", async () => {
+    it("should throw an error if token balance in the wallet is too low when creating a SELL limit order", async () => {
         let dex = await Dex.deployed()
         let link = await Link.deployed()
         await truffleAsserts.reverts(
